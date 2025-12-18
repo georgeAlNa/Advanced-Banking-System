@@ -20,9 +20,9 @@ class BankingSystem extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Banking System',
           onGenerateRoute: appRouter.generateRoute,
-          initialRoute: Routes.loginScreen,
+          initialRoute: Routes.transferMoneyScreen,
           theme: ThemeData(
-            primaryColor: AppColors.primaryColor,
+            primaryColor: AppColors.blueColor,
             scaffoldBackgroundColor: AppColors.whiteColor,
           ),
         );
