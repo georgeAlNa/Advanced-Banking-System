@@ -1,3 +1,4 @@
+import 'package:advanced_banking_system/features/home/logic/cubit/home_cubit.dart';
 import 'package:dio/dio.dart';
 
 import 'package:get_it/get_it.dart';
@@ -34,6 +35,18 @@ Future<void> setupGetit() async {
   getIt.registerLazySingleton<LoginRemoteDataSource>(
     () => LoginRemoteDataSourceImp(apiServicesImpl: getIt()),
   );
+  // //! feature - home
+
+  //cubit
+  getIt.registerFactory<HomeCubit>(() => HomeCubit());
+  //repo
+  // getIt.registerLazySingleton<LoginRepo>(
+  //   () => LoginRepo(networkInfo: getIt(), loginRemoteDataSource: getIt()),
+  // );
+  //data source
+  // getIt.registerLazySingleton<LoginRemoteDataSource>(
+  //   () => LoginRemoteDataSourceImp(apiServicesImpl: getIt()),
+  // );
   // //! feature - accounts
 
   //cubit
