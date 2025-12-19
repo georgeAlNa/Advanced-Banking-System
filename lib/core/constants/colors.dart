@@ -34,7 +34,7 @@ class AppColors {
   static Color redLightColor = Color(0xFFEF4444).withValues(alpha: 0.2);
   static const Color lightGrayishTaupeColor = Color(0xFFA8A7A7);
   static const Color greenColor = Color(0xFF28BD20);
-  static const Color blueColor = Color(0xFF123DDB);
+  static const Color blueColor =  Color(0xFF1454F2);
   static const Color yellowColor = Color(0xFFFFD106);
   static const Color pinkSherbetColor = Color(0xFFF7B2B2);
   static const Color lightGoldColor = Color(0xFFF0DB80);
