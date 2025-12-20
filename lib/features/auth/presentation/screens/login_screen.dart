@@ -1,7 +1,11 @@
 import 'package:advanced_banking_system/core/constants/colors.dart';
+import 'package:advanced_banking_system/core/helpers/extentions.dart';
 import 'package:advanced_banking_system/core/helpers/input_validation_type.dart';
 import 'package:advanced_banking_system/core/public_widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/routing/routes.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -166,6 +170,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
+                          context.pushNamedAndRemoveUntil(
+                            Routes.bottomNavBarScreen,
+                            predicate: (route) => false,
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF2563EB),
