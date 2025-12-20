@@ -24,6 +24,14 @@ class AccountsRemoteDataSourceMock implements AccountsRemoteDataSource {
         balance: 1500,
         parentId: '1',
       ),
+      AccountModel(
+        id: '3',
+        name: 'Loan Sub',
+        type: AccountType.loan,
+        status: AccountStatus.active,
+        balance: 1500,
+        parentId: '1',
+      ),
     ];
   }
 }

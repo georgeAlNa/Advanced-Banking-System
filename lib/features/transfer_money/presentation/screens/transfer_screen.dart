@@ -59,15 +59,7 @@ class _TransferScreenState extends State<TransferScreen> {
         return Scaffold(
           backgroundColor: AppColors.background,
           extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: Icon(
-              Icons.arrow_back,
-              color: AppColors.whiteColor,
-              size: 22.sp,
-            ),
-          ),
+          appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
           body: Stack(
             children: [
               _GradientBg(),
