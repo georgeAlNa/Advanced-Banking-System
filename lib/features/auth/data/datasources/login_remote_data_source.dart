@@ -3,11 +3,12 @@ import 'package:dio/dio.dart';
 import '../../../../core/networking/api_services_impl.dart';
 import '../../../../core/networking/app_link_url.dart';
 import '../../../../core/networking/error/error_handler/network_exceptions.dart';
+
 import '../models/login/login_request_body.dart';
 import '../models/login/login_response.dart';
 
 abstract class LoginRemoteDataSource {
-  Future<LoginResponse> login(LoginRequestBody loginRequest);
+  Future<LoginResponse> login(LoginRequestBody request);
 }
 
 class LoginRemoteDataSourceImp implements LoginRemoteDataSource {
@@ -16,19 +17,17 @@ class LoginRemoteDataSourceImp implements LoginRemoteDataSource {
   LoginRemoteDataSourceImp({required this.apiServicesImpl});
 
   @override
-  Future<LoginResponse> login(LoginRequestBody login) async {
+  Future<LoginResponse> login(LoginRequestBody request) async {
     try {
       final result = await apiServicesImpl.post(
         AppLinkUrl.login,
         body: {
-          // 'email': login.email,
-          // 'password': login.password,
+          'email': request.email,
+          'password': request.password,
         },
       );
 
-      // final response = LoginResponse.fromJson(result);
-
-      return LoginResponse();
+      return LoginResponse.fromJson(result);
     } on DioException catch (e) {
       throw NetworkExceptions.getException(e);
     } catch (e) {

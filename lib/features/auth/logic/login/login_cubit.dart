@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,34 +11,27 @@ part 'login_cubit.freezed.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepo _loginRepo;
-  LoginCubit(this._loginRepo) : super(LoginState.initial());
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  LoginCubit(this._loginRepo) : super(const LoginState.initial());
 
-  final formKey = GlobalKey<FormState>();
-
-  Future<void> login() async {
-    if (passwordController.text.length < 8) {
-      emit(LoginState.error(error: "Password Should Be at Least 8 Characters"));
-      return;
-    }
-
-    emit(LoginState.loading());
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    emit(const LoginState.loading());
 
     try {
       final request = LoginRequestBody(
-        // email: emailController.text,
-        // password: passwordController.text,
+        email: email,
+        password: password,
       );
 
       final response = await _loginRepo.login(request);
-
       emit(LoginState.success(response));
     } catch (e) {
       final exception = NetworkExceptions.getException(e);
       final message = NetworkExceptions.getErrorMessage(exception);
-      emit(LoginState.error(error: message));
+      emit(LoginState.error(message));
     }
   }
 }
