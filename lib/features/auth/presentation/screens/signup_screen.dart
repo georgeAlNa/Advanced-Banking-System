@@ -1,7 +1,9 @@
 import 'package:advanced_banking_system/core/constants/colors.dart';
 import 'package:advanced_banking_system/core/helpers/input_validation_type.dart';
 import 'package:advanced_banking_system/core/public_widgets/text_field_widget.dart';
+import 'package:advanced_banking_system/features/auth/logic/signup/signup_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -93,7 +95,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                    
                       TextFieldWidget(
                         controller: _emailController,
                         prefixIcon: Icons.email_outlined,
@@ -104,7 +105,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                    
                       TextFieldWidget(
                         controller: _passwordController,
                         prefixIcon: Icons.lock_outline,
@@ -123,7 +123,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                      
                       TextFieldWidget(
                         controller: _confirmPasswordController,
                         prefixIcon: Icons.lock_outline,
@@ -149,9 +148,16 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              // TODO: call SignupCubit later
+                              context.read<SignupCubit>().signup(
+                                name: _nameController.text,
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                                confirmPassword:
+                                    _confirmPasswordController.text,
+                              );
                             }
                           },
+
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF2563EB),
                             foregroundColor: Colors.white,

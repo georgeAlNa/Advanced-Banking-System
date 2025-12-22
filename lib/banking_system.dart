@@ -21,7 +21,7 @@ class BankingSystem extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Banking System',
           onGenerateRoute: appRouter.generateRoute,
-          initialRoute: Routes.SignupScreen,
+          initialRoute: Routes.loginScreen,
           theme: ThemeData(
             primaryColor: AppColors.blueColor,
             scaffoldBackgroundColor: AppColors.whiteColor,

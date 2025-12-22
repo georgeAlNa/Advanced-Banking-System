@@ -1,5 +1,6 @@
-import 'package:advanced_banking_system/features/auth/presentation/screens/signup_screen.dart';
+
 import 'package:advanced_banking_system/features/auth/presentation/view/login_view.dart';
+import 'package:advanced_banking_system/features/auth/presentation/view/signup_view.dart';
 import 'package:advanced_banking_system/features/home/logic/cubit/home_cubit.dart';
 import 'package:advanced_banking_system/features/home/presentation/screens/bottom_nav_bar.dart';
 import 'package:advanced_banking_system/features/home/presentation/screens/home_screen.dart';
@@ -8,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/accounts/presentation/screens/accounts_screen.dart';
-import '../../features/auth/logic/login/login_cubit.dart';
-import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/transfer_money/presentation/screens/transfer_screen.dart';
 import '../di/dependency_injection.dart';
@@ -19,12 +18,7 @@ class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.SignupScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<LoginCubit>(),
-            child: SignupScreen(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => const SignupView());
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginView());
 
