@@ -5,6 +5,7 @@ import 'core/constants/colors.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/routes.dart';
 
+
 class BankingSystem extends StatelessWidget {
   final AppRouter appRouter;
   const BankingSystem({super.key, required this.appRouter});
@@ -20,7 +21,7 @@ class BankingSystem extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Banking System',
           onGenerateRoute: appRouter.generateRoute,
-          initialRoute: Routes.loginScreen,
+          initialRoute: Routes.SignupScreen,
           theme: ThemeData(
             primaryColor: AppColors.blueColor,
             scaffoldBackgroundColor: AppColors.whiteColor,

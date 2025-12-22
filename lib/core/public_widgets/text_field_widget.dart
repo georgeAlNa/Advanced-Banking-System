@@ -62,7 +62,7 @@ class TextFieldWidget extends StatelessWidget {
       width: width?.w,
       child: TextFormField(
         readOnly: readOnly ?? false,
-        style: TextStyle(color: inputColor ?? AppColors.greyColor),
+        style: TextStyle(color: inputColor ?? AppColors.blackColor, fontSize: 14.sp),
         keyboardType: keyboardType ?? TextInputType.text,
         cursorColor: AppColors.blueColor,
         validator: (value) => InputValidator.validate(

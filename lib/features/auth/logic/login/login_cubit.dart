@@ -18,8 +18,9 @@ class LoginCubit extends Cubit<LoginState> {
     required String email,
     required String password,
   }) async {
-    emit(const LoginState.loading());
+    if (state is _Loading) return;
 
+    emit(const LoginState.loading());
     try {
       final request = LoginRequestBody(
         email: email,

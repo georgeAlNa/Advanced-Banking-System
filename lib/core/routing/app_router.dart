@@ -1,3 +1,5 @@
+import 'package:advanced_banking_system/features/auth/presentation/screens/signup_screen.dart';
+import 'package:advanced_banking_system/features/auth/presentation/view/login_view.dart';
 import 'package:advanced_banking_system/features/home/logic/cubit/home_cubit.dart';
 import 'package:advanced_banking_system/features/home/presentation/screens/bottom_nav_bar.dart';
 import 'package:advanced_banking_system/features/home/presentation/screens/home_screen.dart';
@@ -16,13 +18,16 @@ import 'routes.dart';
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.loginScreen:
+      case Routes.SignupScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<LoginCubit>(),
-            child: LoginScreen(),
+            child: SignupScreen(),
           ),
         );
+      case Routes.loginScreen:
+        return MaterialPageRoute(builder: (_) => const LoginView());
+
       case Routes.bottomNavBarScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(

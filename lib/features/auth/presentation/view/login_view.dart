@@ -28,7 +28,7 @@ class LoginView extends StatelessWidget {
       ),
       child: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
-          state.whenOrNull(
+          state.maybeWhen(
             loading: () {
               showDialog(
                 context: context,
@@ -38,15 +38,22 @@ class LoginView extends StatelessWidget {
               );
             },
             success: (_) {
-              Navigator.of(context).pop(); // close loading
-              Navigator.pushReplacementNamed(context, '/home');
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context); // close loading
+              }
+
+              Navigator.pushReplacementNamed(context, '/HomeScreen');
             },
             error: (msg) {
-              Navigator.of(context).pop(); // close loading
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context);
+              }
+
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(msg)));
             },
+            orElse: () {},
           );
         },
         child: const LoginScreen(),

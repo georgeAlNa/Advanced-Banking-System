@@ -21,10 +21,7 @@ class LoginRemoteDataSourceImp implements LoginRemoteDataSource {
     try {
       final result = await apiServicesImpl.post(
         AppLinkUrl.login,
-        body: {
-          'email': request.email,
-          'password': request.password,
-        },
+        body: request.toJson(),
       );
 
       return LoginResponse.fromJson(result);

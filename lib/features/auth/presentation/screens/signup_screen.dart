@@ -1,29 +1,31 @@
 import 'package:advanced_banking_system/core/constants/colors.dart';
 import 'package:advanced_banking_system/core/helpers/input_validation_type.dart';
 import 'package:advanced_banking_system/core/public_widgets/text_field_widget.dart';
-import 'package:advanced_banking_system/features/auth/logic/login/login_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   bool _obscurePassword = true;
-  bool _rememberMe = false;
+  bool _obscureConfirmPassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueColor, // Blue background
+      backgroundColor: AppColors.blueColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -57,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Welcome Back! Please login to your account.',
+                    'Create your account to get started.',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white.withOpacity(0.9),
@@ -81,7 +83,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Username Field
+                      TextFieldWidget(
+                        controller: _nameController,
+                        prefixIcon: Icons.person_outline,
+                        hintText: 'Enter your full name',
+                        labelText: 'Full Name',
+                        obscureText: false,
+                        validationType: InputValidationType.none,
+                      ),
+                      const SizedBox(height: 16),
+
+                    
                       TextFieldWidget(
                         controller: _emailController,
                         prefixIcon: Icons.email_outlined,
@@ -92,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                      // Password Field
+                    
                       TextFieldWidget(
                         controller: _passwordController,
                         prefixIcon: Icons.lock_outline,
@@ -109,77 +121,37 @@ class _LoginScreenState extends State<LoginScreen> {
                         obscureText: _obscurePassword,
                         validationType: InputValidationType.none,
                       ),
-
                       const SizedBox(height: 16),
 
-                      // Remember Me & Forgot Password
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: Checkbox(
-                                  activeColor: AppColors.blueColor,
-                                  value: _rememberMe,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _rememberMe = value ?? false;
-                                    });
-                                  },
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  side: const BorderSide(
-                                    color: Color(0xFFCBD5E1),
-                                    width: 1.5,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              const Text(
-                                'Remember me',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color.fromARGB(255, 34, 37, 41),
-                                ),
-                              ),
-                            ],
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              minimumSize: Size.zero,
-                            ),
-                            child: const Text(
-                              'Forgot password?',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF2563EB),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
+                      
+                      TextFieldWidget(
+                        controller: _confirmPasswordController,
+                        prefixIcon: Icons.lock_outline,
+                        suffixIcon: _obscureConfirmPassword
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                        onPressedSuffixIcon: () {
+                          setState(() {
+                            _obscureConfirmPassword = !_obscureConfirmPassword;
+                          });
+                        },
+                        hintText: 'Confirm your password',
+                        labelText: 'Confirm Password',
+                        obscureText: _obscureConfirmPassword,
+                        validationType: InputValidationType.none,
                       ),
 
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 24),
 
-                      // Sign In Button
+                      // Sign Up Button
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              context.read<LoginCubit>().login(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              );
+                              // TODO: call SignupCubit later
                             }
                           },
-
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF2563EB),
                             foregroundColor: Colors.white,
@@ -190,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             elevation: 0,
                           ),
                           child: const Text(
-                            'Sign In',
+                            'Sign Up',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -198,24 +170,28 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
+
                       const SizedBox(height: 24),
 
-                      // Sign Up Link
+                      // Login Link
                       Center(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacementNamed(context, '/SignupScreen');
+                            Navigator.pushReplacementNamed(
+                              context,
+                              '/LoginScreen',
+                            );
                           },
                           child: const Text.rich(
                             TextSpan(
-                              text: "Don't have an account? ",
+                              text: "Already have an account? ",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 34, 37, 41),
                                 fontSize: 14,
                               ),
                               children: [
                                 TextSpan(
-                                  text: 'Sign Up',
+                                  text: 'Sign In',
                                   style: TextStyle(
                                     color: Color(0xFF2563EB),
                                     fontWeight: FontWeight.w600,
@@ -240,8 +216,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 }
