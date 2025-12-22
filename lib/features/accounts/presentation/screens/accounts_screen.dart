@@ -50,15 +50,7 @@ class _AccountsScreenState extends State<AccountsScreen> {
         return Scaffold(
           backgroundColor: AppColors.background,
           extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: Icon(
-              Icons.arrow_back,
-              color: AppColors.whiteColor,
-              size: 22.sp,
-            ),
-          ),
+          appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
           floatingActionButton: FloatingActionButton(
             backgroundColor: AppColors.blueColor,
             foregroundColor: AppColors.whiteColor,

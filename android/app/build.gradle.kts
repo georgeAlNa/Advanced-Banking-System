@@ -8,6 +8,7 @@ plugins {
 android {
     namespace = "com.example.advanced_banking_system"
     compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

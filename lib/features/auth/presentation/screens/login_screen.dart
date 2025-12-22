@@ -1,4 +1,5 @@
 import 'package:advanced_banking_system/core/constants/colors.dart';
+import 'package:advanced_banking_system/core/helpers/extentions.dart';
 import 'package:advanced_banking_system/core/helpers/input_validation_type.dart';
 import 'package:advanced_banking_system/core/public_widgets/text_field_widget.dart';
 import 'package:advanced_banking_system/features/auth/logic/login/login_cubit.dart';
