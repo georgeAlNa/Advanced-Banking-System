@@ -1,5 +1,4 @@
 import 'package:advanced_banking_system/core/constants/colors.dart';
-import 'package:advanced_banking_system/core/helpers/extentions.dart';
 import 'package:advanced_banking_system/core/helpers/input_validation_type.dart';
 import 'package:advanced_banking_system/core/public_widgets/text_field_widget.dart';
 import 'package:advanced_banking_system/features/auth/logic/login/login_cubit.dart';
@@ -24,14 +23,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueColor, // Blue background
+      backgroundColor: AppColors.blueColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(height: 50),
 
-              // Title section
+             
               Column(
                 children: [
                   Container(
@@ -69,7 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 35),
 
-              // Main form container
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 24),
                 padding: const EdgeInsets.all(32),
@@ -82,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Username Field
+                      
                       TextFieldWidget(
                         controller: _emailController,
                         prefixIcon: Icons.email_outlined,
@@ -93,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                      // Password Field
+                     
                       TextFieldWidget(
                         controller: _passwordController,
                         prefixIcon: Icons.lock_outline,
@@ -112,8 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       const SizedBox(height: 16),
-
-                      // Remember Me & Forgot Password
+                     
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -168,7 +165,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: 20),
 
-                      // Sign In Button
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -201,7 +197,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Sign Up Link
                       Center(
                         child: GestureDetector(
                           onTap: () {

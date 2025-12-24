@@ -1,3 +1,4 @@
+import 'package:advanced_banking_system/features/auth/presentation/screens/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,7 +22,7 @@ class BankingSystem extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Banking System',
           onGenerateRoute: appRouter.generateRoute,
-          initialRoute: Routes.loginScreen,
+          initialRoute: Routes.signupScreen,
           theme: ThemeData(
             primaryColor: AppColors.blueColor,
             scaffoldBackgroundColor: AppColors.whiteColor,

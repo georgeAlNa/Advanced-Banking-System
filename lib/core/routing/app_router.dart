@@ -1,5 +1,6 @@
-
+import 'package:advanced_banking_system/features/auth/presentation/screens/otp_screen.dart';
 import 'package:advanced_banking_system/features/auth/presentation/view/login_view.dart';
+import 'package:advanced_banking_system/features/auth/presentation/view/otp_view.dart';
 import 'package:advanced_banking_system/features/auth/presentation/view/signup_view.dart';
 import 'package:advanced_banking_system/features/home/logic/cubit/home_cubit.dart';
 import 'package:advanced_banking_system/features/home/presentation/screens/bottom_nav_bar.dart';
@@ -17,7 +18,7 @@ import 'routes.dart';
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.SignupScreen:
+      case Routes.signupScreen:
         return MaterialPageRoute(builder: (_) => const SignupView());
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginView());
@@ -29,6 +30,15 @@ class AppRouter {
             child: BottomNavBar(),
           ),
         );
+      case Routes.otpScreen:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => OtpView(
+            email: args['email'],
+            expiryMinutes: args['expiryMinutes'],
+          ),
+        );
+
       case Routes.accountsScreen:
         return MaterialPageRoute(builder: (_) => AccountsScreen());
       case Routes.transferMoneyScreen:

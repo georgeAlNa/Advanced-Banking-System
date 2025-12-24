@@ -42,7 +42,7 @@ class LoginView extends StatelessWidget {
                 Navigator.pop(context); // close loading
               }
 
-              Navigator.pushReplacementNamed(context, '/HomeScreen');
+              Navigator.pushReplacementNamed(context, '/BottomNavBarScreen');
             },
             error: (msg) {
               if (Navigator.canPop(context)) {
