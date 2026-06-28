@@ -6,4 +6,6 @@ abstract class TransferRepo {
   Future<double> getRemainingDailyLimit(String accountId);
 
   Future<TransferResponseModel> processTransfer(TransferRequestModel request);
+Future<void> debitAccount(String accountId, double amount);
+Future<void> creditAccount(String accountId, double amount);
 }

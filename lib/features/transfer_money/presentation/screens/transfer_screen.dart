@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/networking/resilient_fetcher.dart';
 import '../../../../core/public_widgets/snack_bar_widget.dart';
 import '../../data/models/transfer_request_model.dart';
 import '../../logic/cubit/transfer_money_cubit.dart';
+import '../widgets/circuit_breaker_banner.dart';
+import '../widgets/transaction_log_panel.dart';   // ← أضفناه
 import '../widgets/transfer_header.dart';
 import '../widgets/transfer_tabs.dart';
 import '../widgets/transfer_form_card.dart';
@@ -27,19 +30,15 @@ class _TransferScreenState extends State<TransferScreen> {
     return BlocConsumer<TransferMoneyCubit, TransferMoneyState>(
       listener: (context, state) {
         state.maybeWhen(
-          success: (message) {
-            showAppSnackBar(context, message);
-          },
-          error: (message) {
-            showAppSnackBar(context, message);
-          },
-          orElse: () {},
+          success: (message) => showAppSnackBar(context, message),
+          error:   (message) => showAppSnackBar(context, message),
+          orElse:  () {},
         );
       },
       builder: (context, state) {
         final isLoading = state.maybeWhen(
           loading: () => true,
-          orElse: () => false,
+          orElse:  () => false,
         );
 
         final ready = state.maybeWhen(
@@ -56,6 +55,8 @@ class _TransferScreenState extends State<TransferScreen> {
           orElse: () => _lastReady,
         );
 
+        final cubit = context.read<TransferMoneyCubit>();
+
         return Scaffold(
           backgroundColor: AppColors.background,
           extendBodyBehindAppBar: true,
@@ -69,20 +70,28 @@ class _TransferScreenState extends State<TransferScreen> {
                   children: [
                     verticalSpace(12),
                     const TransferHeader(),
-
                     verticalSpace(12),
 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: TransferTabs(
                         selected: ready.kind,
-                        onSelected: context
-                            .read<TransferMoneyCubit>()
-                            .changeTab,
+                        onSelected: cubit.changeTab,
                       ),
                     ),
 
-                    verticalSpace(12),
+                    verticalSpace(8),
+
+                    // ── Circuit Breaker Banner ─────────────────────────────
+                    CircuitBreakerBanner(fetcher: AppFetchers.transfer),
+                    verticalSpace(8),
+
+                    // ── 2PC Transaction Log ───────────────────────────────
+                    TransactionLogPanel(
+                      logStream:   cubit.txLogStream,
+                      stateStream: cubit.txStateStream,
+                    ),
+                    verticalSpace(8),
 
                     Expanded(
                       child: SingleChildScrollView(
@@ -130,10 +139,10 @@ class _ReadySnapshot {
   final String note;
 
   const _ReadySnapshot({
-    this.kind = TransferKind.ownAccounts,
-    this.amountText = '',
+    this.kind          = TransferKind.ownAccounts,
+    this.amountText    = '',
     this.fromAccountId,
     this.toAccountId,
-    this.note = '',
+    this.note          = '',
   });
 }
